@@ -53,15 +53,15 @@ export default function Player() {
     }
 
     async function getPlayerRecentMatches() {
-        const ACCOUNT_RECENT_MATCHES_URL = `https://api.opendota.com/api/players/${accountId}/recentMatches`;
+        const ACCOUNT_RECENT_MATCHES_URL = `https://api.opendota.com/api/players/${accountId}` 
+                                            + '/recentMatches';
         const response = await fetch(ACCOUNT_RECENT_MATCHES_URL);
         return await response.json();
     }
 
     useEffect(() => {
-        console.log("is this called every 1s?")
-        // fetchData(); calling this in useEffect makes it get 429 http status code really quick
-    })
+        fetchData();
+    }, [""]);
 
     return (
         <>
