@@ -11,14 +11,14 @@ export default function Search() {
     }
 
     return (
-        <div className={"search-container"}>
-            <img src={logo} className={"search-logo"} alt="Logo"/>
-            <div className={"search-bar"}>
-                <input type="search" className={"search-input"} id="player-search"
-                       placeholder={"32-bit steam account id (e.g 94054712)"}
+        <div className="search-container">
+            <img src={logo} className="search-logo" alt="Logo"/>
+            <div className="search-bar">
+                <input type="search" className="search-input" id="player-search"
+                       placeholder="32-bit steam account id (e.g 94054712)"
                        onChange={event => setAccountId(event.target.value)}/>
 
-                <button className={"search-button"} onClick={navigateToPlayer}>Search</button>
+                <button className="search-button" onClick={navigateToPlayer}>Search</button>
             </div>
         </div>
     );
