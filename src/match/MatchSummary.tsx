@@ -1,8 +1,11 @@
-export default function MatchSummary(match: any) {
+import Match from "./MatchModel";
+
+export default function MatchSummary({recentMatch}: {recentMatch: Match}) {
+    console.log(recentMatch);
+    
     return (
         <div>
-            {match.props.match_id}
-            {console.log(match)}
+            {recentMatch.match_id}
         </div>
     );
 }

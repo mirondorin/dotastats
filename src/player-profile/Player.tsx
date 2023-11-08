@@ -2,35 +2,7 @@ import { useParams } from "react-router-dom";
 import './Player.css';
 import { useEffect, useState } from "react";
 import MatchSummary from "../match/MatchSummary";
-
-type Match = {
-    "match_id": number,
-    "player_slot": number,
-    "radiant_win": boolean,
-    "duration": number,
-    "game_mode": number,
-    "lobby_type": number,
-    "hero_id": number,
-    "start_time": number,
-    "version": number,
-    "kills": number,
-    "deaths": number,
-    "assists": number,
-    "skill": object,
-    "average_rank": number,
-    "xp_per_min": number,
-    "gold_per_min": number,
-    "hero_damage": number,
-    "tower_damage": number,
-    "hero_healing": number,
-    "last_hits": number,
-    "lane": number,
-    "lane_role": number,
-    "is_roaming": boolean,
-    "cluster": number,
-    "leaver_status": number,
-    "party_size": number
-}
+import Match from "../match/MatchModel";
 
 export default function Player() {
 
@@ -61,7 +33,7 @@ export default function Player() {
 
     useEffect(() => {
         fetchData();
-    }, [""]);
+    }, []);
 
     return (
         <>
@@ -69,7 +41,7 @@ export default function Player() {
                 {recentMatches.map(recentMatch =>
                     <li
                         key={recentMatch.match_id}>
-                        <MatchSummary props={recentMatch}></MatchSummary>
+                        <MatchSummary recentMatch={recentMatch}></MatchSummary>
                     </li>)}
             </ul>
         </>
