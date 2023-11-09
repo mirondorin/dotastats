@@ -1,8 +1,7 @@
-import { useParams } from "react-router-dom";
-import './Player.css';
 import { useEffect, useState } from "react";
-import MatchSummary from "../match/MatchSummary";
+import { useParams } from "react-router-dom";
 import Match from "../match/MatchModel";
+import RecentMatchesTable from "../match/RecentMatchesTable";
 
 export default function Player() {
 
@@ -25,8 +24,8 @@ export default function Player() {
     }
 
     async function getPlayerRecentMatches() {
-        const ACCOUNT_RECENT_MATCHES_URL = `https://api.opendota.com/api/players/${accountId}` 
-                                            + '/recentMatches';
+        const ACCOUNT_RECENT_MATCHES_URL = `https://api.opendota.com/api/players/${accountId}`
+            + '/recentMatches';
         const response = await fetch(ACCOUNT_RECENT_MATCHES_URL);
         return await response.json();
     }
@@ -36,14 +35,6 @@ export default function Player() {
     }, []);
 
     return (
-        <>
-            <ul>
-                {recentMatches.map(recentMatch =>
-                    <li
-                        key={recentMatch.match_id}>
-                        <MatchSummary recentMatch={recentMatch}></MatchSummary>
-                    </li>)}
-            </ul>
-        </>
+        <RecentMatchesTable recentMatches={recentMatches}></RecentMatchesTable>
     );
 }

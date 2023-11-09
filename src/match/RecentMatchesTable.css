@@ -1,0 +1,28 @@
+table {
+    color: white;
+}
+
+td {
+    padding: 10px;
+}
+
+td p {
+    margin: 0;
+}
+
+tr:nth-child(even) td {
+    background-color: rgb(70, 70, 70);
+}
+
+tr:nth-child(odd) td {
+    background-color: rgb(56, 56, 56);
+}
+
+.hero-container {
+    display: flex;
+}
+
+.hero-img {
+    height: 40px;
+    margin-right: 7px;
+}
