@@ -23,4 +23,5 @@ code {
 #root {
   background: rgb(37,37,37);
   height: 100%;
+  overflow: scroll;
 }

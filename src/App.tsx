@@ -1,4 +1,3 @@
-import React from 'react';
 import './App.css';
 import Search from "./search-player/Search";
 import {Route, Routes} from "react-router-dom";

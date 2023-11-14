@@ -1,5 +1,6 @@
 import Match from "./MatchModel";
 const heroes = require("../assets/json/heroes.json");
+const lobbyTypes = require("../assets/json/lobby_type.json");
 
 function secondsToFullTime(seconds: number) {
     // duration in h:mm:ss format
@@ -20,6 +21,14 @@ function getHeroNameFromId(heroId: number) {
     return heroes[heroId].localized_name;
 }
 
+function getLobbyType(match: Match) {
+    const LOBBY_PREFIX = "lobby_type_";
+    let lobbyType = lobbyTypes[match.lobby_type];
+    let lobbyName = lobbyType.name.split(LOBBY_PREFIX);
+    
+    return lobbyName;
+}
+
 export default function MatchSummary({ recentMatch }: { recentMatch: Match }) {
 
     return (
@@ -31,7 +40,7 @@ export default function MatchSummary({ recentMatch }: { recentMatch: Match }) {
                 </div>
             </td>
             <td className="match-result">{playerWon(recentMatch) ? "Won Match" : "Lost match"}</td>
-            <td className="match-type">Ranked</td>
+            <td className="match-type">{getLobbyType(recentMatch)}</td>
             <td className="match-duration">{secondsToFullTime(recentMatch.duration)}</td>
             <td className="kda">{recentMatch.kills}/{recentMatch.deaths}/{recentMatch.assists}</td>
         </tr>
