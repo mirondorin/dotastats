@@ -26,7 +26,7 @@ export default function MatchSummary({ recentMatch }: { recentMatch: Match }) {
         <tr>
             <td className="hero">
                 <div className="hero-container">
-                    <img className="hero-img"></img>
+                    <img className="hero-img" src={heroes[recentMatch.hero_id].image_url}></img>
                     <p className="hero-name">{getHeroNameFromId(recentMatch.hero_id)}</p>
                 </div>
             </td>
