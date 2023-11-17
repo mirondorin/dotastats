@@ -3,11 +3,22 @@ import './MatchSummary.css';
 const heroes = require('../assets/json/heroes.json');
 const lobbyTypes = require('../assets/json/lobby_type.json');
 
-function secondsToFullTime(seconds: number) {
-  // duration in h:mm:ss format
-  let duration = new Date(seconds * 1000).toISOString().substring(12, 19);
-  const ZERO_HOURS = '0';
-  return duration[0] === ZERO_HOURS ? duration.substring(2) : duration;
+enum TeamSlot {
+  RADIANT_FIRST_SLOT = 0,
+  RADIANT_LAST_SLOT = 127
+}
+
+function pad(num: number) {
+  return ("0" + num).slice(-2);
+}
+
+function toHoursMinutesSeconds(seconds: number) {
+  let minutes = Math.floor(seconds / 60);
+  seconds = seconds % 60;
+  let hours = Math.floor(minutes / 60);
+  minutes = minutes % 60;
+
+  return `${hours > 0 ? hours + ":" : ""}${pad(minutes)}:${pad(seconds)}`;
 }
 
 function playerWon(recentMatch: Match) {
@@ -15,7 +26,7 @@ function playerWon(recentMatch: Match) {
 }
 
 function isPlayerRadiant(playerSlot: number) {
-  return playerSlot >= 0 && playerSlot <= 127;
+  return playerSlot >= TeamSlot.RADIANT_FIRST_SLOT && playerSlot <= TeamSlot.RADIANT_LAST_SLOT;
 }
 
 function getHeroNameFromId(heroId: number) {
@@ -43,7 +54,7 @@ export default function MatchSummary({ recentMatch }: { recentMatch: Match }) {
         {playerWon(recentMatch) ? 'Won Match' : 'Lost Match'}
       </td>
       <td className="match-type">{getLobbyType(recentMatch)}</td>
-      <td className="match-duration">{secondsToFullTime(recentMatch.duration)}</td>
+      <td className="match-duration">{toHoursMinutesSeconds(recentMatch.duration)}</td>
       <td className="kda">
         {recentMatch.kills}/{recentMatch.deaths}/{recentMatch.assists}
       </td>
