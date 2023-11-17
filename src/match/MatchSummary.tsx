@@ -1,48 +1,52 @@
-import Match from "./MatchModel";
-const heroes = require("../assets/json/heroes.json");
-const lobbyTypes = require("../assets/json/lobby_type.json");
+import Match from './MatchModel';
+import './MatchSummary.css';
+const heroes = require('../assets/json/heroes.json');
+const lobbyTypes = require('../assets/json/lobby_type.json');
 
 function secondsToFullTime(seconds: number) {
-    // duration in h:mm:ss format
-    let duration = new Date(seconds * 1000).toISOString().substring(12, 19);
-    const ZERO_HOURS = "0";
-    return duration[0] === ZERO_HOURS ? duration.substring(2) : duration;
+  // duration in h:mm:ss format
+  let duration = new Date(seconds * 1000).toISOString().substring(12, 19);
+  const ZERO_HOURS = '0';
+  return duration[0] === ZERO_HOURS ? duration.substring(2) : duration;
 }
 
 function playerWon(recentMatch: Match) {
-    return recentMatch.radiant_win && isPlayerRadiant(recentMatch.player_slot)
+  return recentMatch.radiant_win && isPlayerRadiant(recentMatch.player_slot);
 }
 
 function isPlayerRadiant(playerSlot: number) {
-    return playerSlot >= 0 && playerSlot <= 127;
+  return playerSlot >= 0 && playerSlot <= 127;
 }
 
 function getHeroNameFromId(heroId: number) {
-    return heroes[heroId].localized_name;
+  return heroes[heroId].localized_name;
 }
 
 function getLobbyType(match: Match) {
-    const LOBBY_PREFIX = "lobby_type_";
-    let lobbyType = lobbyTypes[match.lobby_type];
-    let lobbyName = lobbyType.name.split(LOBBY_PREFIX);
-    
-    return lobbyName;
+  const LOBBY_PREFIX = 'lobby_type_';
+  let lobbyType = lobbyTypes[match.lobby_type];
+  let lobbyName = lobbyType.name.split(LOBBY_PREFIX);
+
+  return lobbyName;
 }
 
 export default function MatchSummary({ recentMatch }: { recentMatch: Match }) {
-
-    return (
-        <tr>
-            <td className="hero">
-                <div className="hero-container">
-                    <img className="hero-img" src={heroes[recentMatch.hero_id].image_url}></img>
-                    <p className="hero-name">{getHeroNameFromId(recentMatch.hero_id)}</p>
-                </div>
-            </td>
-            <td className="match-result">{playerWon(recentMatch) ? "Won Match" : "Lost match"}</td>
-            <td className="match-type">{getLobbyType(recentMatch)}</td>
-            <td className="match-duration">{secondsToFullTime(recentMatch.duration)}</td>
-            <td className="kda">{recentMatch.kills}/{recentMatch.deaths}/{recentMatch.assists}</td>
-        </tr>
-    );
+  return (
+    <tr>
+      <td className="hero">
+        <div className="hero-container">
+          <img className="hero-img" src={heroes[recentMatch.hero_id].image_url}></img>
+          <p className="hero-name">{getHeroNameFromId(recentMatch.hero_id)}</p>
+        </div>
+      </td>
+      <td className={`match-result ${playerWon(recentMatch) ? 'match-won' : 'match-lost'}`}>
+        {playerWon(recentMatch) ? 'Won Match' : 'Lost Match'}
+      </td>
+      <td className="match-type">{getLobbyType(recentMatch)}</td>
+      <td className="match-duration">{secondsToFullTime(recentMatch.duration)}</td>
+      <td className="kda">
+        {recentMatch.kills}/{recentMatch.deaths}/{recentMatch.assists}
+      </td>
+    </tr>
+  );
 }
