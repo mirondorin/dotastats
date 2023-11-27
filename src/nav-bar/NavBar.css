@@ -1,0 +1,18 @@
+.nav-bar {
+  position: sticky;
+  top: 0px;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  background: red;
+}
+
+.nav-bar a {
+  color: white;
+  text-shadow: 0.5px 0.5px 0.5px black;
+  padding: 3px;
+}
+
+.nav-bar a:link {
+  text-decoration: none;
+}
