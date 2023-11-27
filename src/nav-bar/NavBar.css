@@ -3,7 +3,7 @@
   top: 0px;
   display: flex;
   align-items: center;
-  height: 40px;
+  height: var(--nav-bar-height);
   background: red;
 }
 

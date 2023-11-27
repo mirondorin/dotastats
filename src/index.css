@@ -1,3 +1,7 @@
+:root {
+  --nav-bar-height: 40px;
+}
+
 html, body {
   height: 100%;
 }
