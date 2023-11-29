@@ -1,0 +1,7 @@
+.heroes-container {
+  height: calc(100% - var(--nav-bar-height));
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  color: white
+}
