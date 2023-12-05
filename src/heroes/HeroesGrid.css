@@ -1,4 +1,19 @@
+.heroes-grid-header {
+  display: flex;
+  align-items: center;
+}
+
+.attribute-icon {
+  height: 30px;
+  margin-left: 5px;
+}
+
 .hero-avatar {
-  height: 40px;
+  transition: transform .2s;
+  height: 50px;
   margin: 2px 3px;
+}
+
+.hero-avatar:hover {
+  transform: scale(2.5);
 }
